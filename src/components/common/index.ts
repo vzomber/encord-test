@@ -1,3 +1,3 @@
-export * from './AppBar';
 export * from './Button';
-export * from './Toolbar';
+export * from './Tabs';
+export * from './Tab';

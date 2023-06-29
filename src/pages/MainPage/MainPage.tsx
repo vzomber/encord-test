@@ -1,9 +1,9 @@
-import { AppHeader } from 'components/AppHeader';
+import { AppTabs } from 'components/AppTabs';
 
 export const MainPage = () => {
   return (
     <>
-      <AppHeader />
+      <AppTabs />
     </>
   );
 };
