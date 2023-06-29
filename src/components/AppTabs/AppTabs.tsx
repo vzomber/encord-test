@@ -1,6 +1,6 @@
 import { Button, Tab, Tabs } from 'components/common';
-import { useState } from 'react';
-import { TabsIndexes } from './types';
+import { useRef, useState } from 'react';
+import { fileClonesChecker, TabsIndexes } from './helpers';
 
 const a11yProps = (index: number) => {
   return {
@@ -11,9 +11,31 @@ const a11yProps = (index: number) => {
 
 export const AppTabs = () => {
   const [currentTab, setCurrentTab] = useState(TabsIndexes.Images);
+  const uploadInputRef = useRef<HTMLInputElement>(null);
+  const [files, setFiles] = useState<File[]>([]);
 
   const handleChange = (event: React.SyntheticEvent, newTabIndex: number) =>
     setCurrentTab(newTabIndex);
+
+  const uploadFileOnClickHandler = () => uploadInputRef.current?.click();
+
+  const apiCallHandler = () => {
+    if (!uploadInputRef.current || !uploadInputRef.current.files?.length)
+      return;
+
+    const { files: newlyUploadedFilesList } = uploadInputRef.current;
+    const newFiles = fileClonesChecker(
+      files,
+      Array.from(newlyUploadedFilesList)
+    );
+    console.log({ newFiles });
+
+    if (newFiles.length) setFiles((prev) => [...prev, ...newFiles]);
+
+    // uploadInputRef.current.value = '';
+  };
+
+  console.log({ files });
 
   return (
     <div className={'grow'}>
@@ -27,9 +49,19 @@ export const AppTabs = () => {
           <Tab label={'Predictions'} {...a11yProps(1)} />
         </Tabs>
         {currentTab === TabsIndexes.Images && (
-          <div className={'mx-5 flex'}>
-            <Button>Upload image</Button>
-          </div>
+          <>
+            <div className={'mx-5 flex'}>
+              <Button onClick={uploadFileOnClickHandler}>Upload image</Button>
+            </div>
+            <input
+              hidden
+              ref={uploadInputRef}
+              multiple
+              type="file"
+              id={'file-upload'}
+              onChange={apiCallHandler}
+            />
+          </>
         )}
       </div>
     </div>
