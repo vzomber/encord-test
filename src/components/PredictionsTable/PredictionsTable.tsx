@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import {
   Button,
   Table,
@@ -10,10 +10,25 @@ import {
 } from 'components/common';
 import Paper from '@mui/material/Paper';
 import { IPredictionsTableProps } from './types';
+import { ImageDialog } from 'components/ImageDialog';
+import { IPredictedFile } from 'pages/MainPage/types';
 
 const COLUMNS_NUMBER = 4;
 
 export const PredictionsTable: FC<IPredictionsTableProps> = ({ files }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [fileForView, setFileForView] = useState<null | IPredictedFile>(null);
+
+  const handleClose = () => {
+    setIsOpen(false);
+    setFileForView(null);
+  };
+
+  const handleOpen = (file: IPredictedFile) => {
+    setFileForView(file);
+    setIsOpen(true);
+  };
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -44,7 +59,7 @@ export const PredictionsTable: FC<IPredictionsTableProps> = ({ files }) => {
                 <TableCell align="right">
                   <Button
                     variant={'contained'}
-                    // onClick={() => setCurrentTab(TabsIndexesEnum.ImageView)}
+                    onClick={() => handleOpen(fileData)}
                   >
                     View
                   </Button>
@@ -54,6 +69,13 @@ export const PredictionsTable: FC<IPredictionsTableProps> = ({ files }) => {
           </TableBody>
         </Table>
       </TableContainer>
+      {fileForView && (
+        <ImageDialog
+          fileData={fileForView}
+          isOpen={isOpen}
+          onClose={handleClose}
+        />
+      )}
     </>
   );
 };

@@ -19,7 +19,7 @@ export const MainPage = () => {
         return null;
     }
   };
-
+  console.log(files);
   return (
     <>
       <AppHeader currentTab={currentTab} setCurrentTab={setCurrentTab} />

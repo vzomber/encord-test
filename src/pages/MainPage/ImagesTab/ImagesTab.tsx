@@ -15,6 +15,7 @@ export const ImagesTab: FC<IImagesTabProps> = ({ files, setFiles }) => {
     if (!uploadInputRef.current || !uploadInputRef.current.files?.length)
       return;
 
+    const timestamp = Date.now();
     const { files: newlyUploadedFilesList } = uploadInputRef.current;
     const newFiles = fileClonesChecker(
       files,
@@ -26,6 +27,7 @@ export const ImagesTab: FC<IImagesTabProps> = ({ files, setFiles }) => {
         id: uuidv4(),
         file,
         predictions: [],
+        timestamp,
       }));
       setFiles((prev) => [...prev, ...filesForPrediction]);
     }

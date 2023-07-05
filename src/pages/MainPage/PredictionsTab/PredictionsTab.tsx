@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { IPredictionsTabProps } from './types';
 
 export const PredictionsTab: FC<IPredictionsTabProps> = ({ files }) => {
-  const predictions = files.map((file) => file.predictions);
+  const predictions = files.filter((file) => file.predictions.length);
 
   return (
     <div className={'mt-10'}>
