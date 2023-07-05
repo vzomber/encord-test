@@ -1,4 +1,6 @@
+import { IPredictedFile } from '../types';
+
 export interface IImagesTabProps {
-  files: File[];
-  setFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  files: IPredictedFile[];
+  setFiles: React.Dispatch<React.SetStateAction<IPredictedFile[]>>;
 }

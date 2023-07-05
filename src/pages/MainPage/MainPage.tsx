@@ -3,10 +3,11 @@ import { AppHeader } from 'components/AppHeader';
 import { TabsIndexes } from './helpers';
 import { ImagesTab } from './ImagesTab';
 import { PredictionsTab } from './PredictionsTab';
+import { IPredictedFile } from './types';
 
 export const MainPage = () => {
   const [currentTab, setCurrentTab] = useState(TabsIndexes.Images);
-  const [files, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = useState<IPredictedFile[]>([]);
 
   const activeTabSwitchHandler = () => {
     switch (currentTab) {
@@ -18,7 +19,7 @@ export const MainPage = () => {
         return null;
     }
   };
-  console.log(files);
+
   return (
     <>
       <AppHeader currentTab={currentTab} setCurrentTab={setCurrentTab} />

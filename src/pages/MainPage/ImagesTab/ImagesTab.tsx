@@ -2,7 +2,9 @@ import { Button } from 'components/common';
 import { ImagesTable } from 'components/ImagesTable/';
 import { FC, useRef } from 'react';
 import { fileClonesChecker } from '../helpers';
+import { IPredictedFile } from '../types';
 import { IImagesTabProps } from './types';
+import { v4 as uuidv4 } from 'uuid';
 
 export const ImagesTab: FC<IImagesTabProps> = ({ files, setFiles }) => {
   const uploadInputRef = useRef<HTMLInputElement>(null);
@@ -19,8 +21,15 @@ export const ImagesTab: FC<IImagesTabProps> = ({ files, setFiles }) => {
       Array.from(newlyUploadedFilesList)
     );
 
-    if (newFiles.length) setFiles((prev) => [...prev, ...newFiles]);
-    // uploadInputRef.current.value = '';
+    if (newFiles.length) {
+      const filesForPrediction: IPredictedFile[] = newFiles.map((file) => ({
+        id: uuidv4(),
+        file,
+        predictions: [],
+      }));
+      setFiles((prev) => [...prev, ...filesForPrediction]);
+    }
+    uploadInputRef.current.value = '';
   };
 
   return (
@@ -42,7 +51,7 @@ export const ImagesTab: FC<IImagesTabProps> = ({ files, setFiles }) => {
 
       {files.length ? (
         <div className={'px-24'}>
-          <ImagesTable files={files} />
+          <ImagesTable files={files} setFiles={setFiles} />
         </div>
       ) : (
         <div className={'flex justify-center'}>
