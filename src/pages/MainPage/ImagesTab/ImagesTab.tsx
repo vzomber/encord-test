@@ -1,5 +1,5 @@
 import { Button } from 'components/common';
-import { ImagesTable } from 'components/ImagesTable/';
+import { ImagesTable } from 'components/ImagesTable';
 import { FC, useRef } from 'react';
 import { fileClonesChecker } from '../helpers';
 import { IPredictedFile } from '../types';
@@ -55,9 +55,9 @@ export const ImagesTab: FC<IImagesTabProps> = ({ files, setFiles }) => {
         </div>
       ) : (
         <div className={'flex justify-center'}>
-          <span className={'text-2xl font-semibold text-gray-500'}>
+          <p className={'text-2xl font-semibold text-gray-500'}>
             No images uploaded
-          </span>
+          </p>
         </div>
       )}
     </div>

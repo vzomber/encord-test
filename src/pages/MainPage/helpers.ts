@@ -1,9 +1,9 @@
 import { IPredictedFile } from './types';
 
-export const TabsIndexes = {
-  Images: 0,
-  Predictions: 1,
-};
+export enum TabsIndexesEnum {
+  'Images' = 0,
+  'Predictions' = 1,
+}
 
 export const fileClonesChecker = (
   uploadedFiles: IPredictedFile[],

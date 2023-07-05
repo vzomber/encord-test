@@ -49,7 +49,7 @@ export const ImagesTable: FC<IImagesTableProps> = ({ files, setFiles }) => {
     setPredictFileId(id);
     setIsOpen(true);
   };
-  console.log(files);
+
   return (
     <>
       <TableContainer component={Paper}>
