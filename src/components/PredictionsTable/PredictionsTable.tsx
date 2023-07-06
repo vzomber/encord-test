@@ -74,6 +74,7 @@ export const PredictionsTable: FC<IPredictionsTableProps> = ({ files }) => {
           fileData={fileForView}
           isOpen={isOpen}
           onClose={handleClose}
+          predictions={fileForView.predictions}
         />
       )}
     </>
