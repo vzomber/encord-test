@@ -27,13 +27,7 @@ export const ImageDialog: FC<IImageDialogProps> = ({
   };
 
   return (
-    <Dialog
-      open={isOpen}
-      onClose={closeHandler}
-      PaperProps={{
-        sx: { width: '40rem' },
-      }}
-    >
+    <Dialog open={isOpen} onClose={closeHandler}>
       <div className={'relative'}>
         <img
           src={URL.createObjectURL(fileData.file)}
